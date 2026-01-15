@@ -127,8 +127,3 @@ See the full license text in the `LICENSE` file.
 Pull requests are welcome.  
 If you have ideas, improvements, or bug reports, feel free to open an issue.
 
----
-
-## 💬 Author
-
-Built by **Michael**, a resilient, systems‑oriented developer who values clarity, maintainability, and thoughtful architecture.
