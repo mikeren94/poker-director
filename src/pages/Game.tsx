@@ -7,23 +7,26 @@ import KnockoutSection from "../components/game/KnockoutSection";
 
 export default function GamePage() {
   // TEMP: In the real app you'll load this from storage
-  const [game, setGame] = useState<Game | null>(null);
-
-  setGame(new Game('Saturday poker', new Date()));
+  const [game, setGame] = useState<Game | null>(new Game('redtooth', new Date()));
 
   if (!game) {
     return <div>No game loaded yet</div>;
   }
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <GameHeader game={game} />
+    <div
+      className="min-h-screen flex flex-col gap-6"
+      style={{ backgroundColor: "rgb(var(--bg))", color: "rgb(var(--text))" }}
+    >
+      <div className="max-w-xl w-full mx-auto flex flex-col gap-6">
+        <GameHeader game={game} />
 
-      <SideGamesSection game={game} setGame={setGame} />
+        <SideGamesSection game={game} setGame={setGame} />
 
-      <PlayersTable game={game} setGame={setGame} />
+        <PlayersTable game={game} setGame={setGame} />
 
-      <KnockoutSection game={game} setGame={setGame} />
+        <KnockoutSection game={game} setGame={setGame} />
+      </div>
     </div>
   );
 }

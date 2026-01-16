@@ -1,0 +1,33 @@
+:root {
+  --bg: 255 255 255;
+  --text: 17 24 39;
+
+  --card-bg: 255 255 255;
+  --input-bg: 243 244 246;
+  --border: 209 213 219;
+
+  --accent: 59 130 246;
+  --accent-text: 255 255 255;
+
+  --table-header-bg: 243 244 246;
+  --table-header-text: 17 24 39;
+
+  --list-item-bg: 243 244 246;
+}
+
+.dark {
+  --bg: 17 24 39;
+  --text: 243 244 246;
+
+  --card-bg: 31 41 55;
+  --input-bg: 55 65 81;
+  --border: 75 85 99;
+
+  --accent: 96 165 250;
+  --accent-text: 17 24 39;
+
+  --table-header-bg: 55 65 81;
+  --table-header-text: 243 244 246;
+
+  --list-item-bg: 55 65 81;
+}
