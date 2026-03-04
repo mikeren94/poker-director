@@ -1,11 +1,10 @@
 import './App.css'
-import GamePage from './pages/Game'
 
 function App() {
 
   return (
     <>
-      <GamePage />
+    <p>Poker director</p>
     </>
   )
 }
