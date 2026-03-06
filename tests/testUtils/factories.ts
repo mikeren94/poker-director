@@ -5,11 +5,17 @@ import SideGame from '../../src/classes/SideGame';
 export function makeGame({
     buyIn = 20,
     sideGames = [],
+    players = [],
+    allowRebuys = false,
+    maxRebuysPerPlayer = null
 }: {
     buyIn?: number;
     sideGames?: SideGame[];
+    players?: Player[];
+    allowRebuys?: boolean;
+    maxRebuysPerPlayer?: number | null;
 } = {}): Game {
-    return new Game(buyIn, sideGames);
+    return new Game(buyIn, sideGames, players, allowRebuys, maxRebuysPerPlayer);
 }
 
 export function makeSideGame(
