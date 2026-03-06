@@ -159,6 +159,11 @@ class Game {
             return;
         }
 
+        // Return if the player is trying to knock themselves out
+        if (killerId === victimId) {
+            return;
+        }
+ 
         // Record a new instance of a knockout for these players
         const knockout = new Knockout(killerId, victimId);
 

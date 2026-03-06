@@ -107,3 +107,80 @@ test("Knocked out players are listed in the order they were knocked out", () => 
     expect(active.length).toBe(1);
     expect(active[0].id).toBe(p3.id);
 });
+
+test("A player cannot knock themselves out", () => {
+    // Create a game that allows knockouts
+    game = makeGame({
+        buyIn: 20,
+        sideGames: [],
+        trackKnockouts: true
+    });
+
+    // Add two players to the game
+    const player1 = makePlayer({
+        name: "Alice"
+    });
+
+    const player2 = makePlayer({
+        name: "Bob"
+    });
+
+    game.addPlayer(player1);
+    game.addPlayer(player2);
+
+    game.recordKnockout(player1.id, player1.id)
+
+    // There should be no knockouts tracked in the game
+    expect(game.knockouts.length).toBe(0);
+});
+
+test("Both players must exist in the game to register a knockout", () => {
+    // Create a game that allows knockouts
+    game = makeGame({
+        buyIn: 20,
+        sideGames: [],
+        trackKnockouts: true
+    });
+
+    // Add two players to the game
+    const player1 = makePlayer({
+        name: "Alice"
+    });
+
+    const player2 = makePlayer({
+        name: "Bob"
+    });
+
+    game.addPlayer(player1);
+
+    game.recordKnockout(player1.id, player2.id)
+
+    // There should be no knockouts tracked in the game
+    expect(game.knockouts.length).toBe(0);
+})
+
+test("knockouts are not recorded in a game that doesn't track knockouts", () => {
+        // Create a game that allows knockouts
+    game = makeGame({
+        buyIn: 20,
+        sideGames: [],
+        trackKnockouts: false
+    });
+
+    // Add two players to the game
+    const player1 = makePlayer({
+        name: "Alice"
+    });
+
+    const player2 = makePlayer({
+        name: "Bob"
+    });
+
+    game.addPlayer(player1);
+    game.addPlayer(player2);
+
+    game.recordKnockout(player1.id, player2.id)
+
+    // There should be no knockouts in the game
+    expect(game.knockouts.length).toBe(0);
+})
