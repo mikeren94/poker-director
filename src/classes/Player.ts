@@ -10,6 +10,8 @@ class Player {
     changeOwed: number; // Ammount of money the player is owed in change after they have paid
     changeGiven: boolean; // Determines if the player has been given their change
     rebuys: number; // Amount of times the player has rebought into the game
+    knockouts: number; // Amount of players the player has knocked out in a knockout side game
+    knockedOut: boolean; // Determines if the player has been knocked out of the game
 
     constructor(
         name: string, 
@@ -18,7 +20,9 @@ class Player {
         paid: boolean = false, 
         changeOwed: number = 0, 
         changeGiven: boolean = false,
-        rebuys: number = 0
+        rebuys: number = 0,
+        knockouts: number = 0,
+        knockedOut: boolean = false
     ) {
         this.id = uuidv4();
         this.name = name;
@@ -28,6 +32,8 @@ class Player {
         this.changeOwed = changeOwed;
         this.changeGiven = changeGiven;
         this.rebuys = rebuys;
+        this.knockouts = knockouts;
+        this.knockedOut = knockedOut
     }
 }
 

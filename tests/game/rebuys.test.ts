@@ -32,6 +32,9 @@ test("A player can rebuy into the game if rebuys are allowed", () => {
 
     // Check that the player's rebuy count has increased
     expect(player.rebuys).toBe(1);
+
+    // Player should not be knocked out in the game
+    expect(player.knockedOut).toBe(false);
 });
 
 test("A player cannot rebuy into the game if rebuys are not allowed", () => {

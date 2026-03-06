@@ -7,15 +7,27 @@ export function makeGame({
     sideGames = [],
     players = [],
     allowRebuys = false,
-    maxRebuysPerPlayer = null
+    maxRebuysPerPlayer = null,
+    rebuyCost = 0,
+    trackKnockouts = false
 }: {
     buyIn?: number;
     sideGames?: SideGame[];
     players?: Player[];
     allowRebuys?: boolean;
     maxRebuysPerPlayer?: number | null;
+    rebuyCost?: number;
+    trackKnockouts?: boolean;
 } = {}): Game {
-    return new Game(buyIn, sideGames, players, allowRebuys, maxRebuysPerPlayer);
+    return new Game(
+        buyIn, 
+        sideGames, 
+        players, 
+        allowRebuys, 
+        maxRebuysPerPlayer, 
+        rebuyCost,
+        trackKnockouts
+    );
 }
 
 export function makeSideGame(
