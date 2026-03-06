@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Input from "../components/forms/Input";
 import Checkbox from "../components/forms/Checkbox";
 import Button from "../components/forms/Button";
-import SideGameForm from "../components/forms/sidegame/SideGameForm";
+import SideGameForm from "../components/sidegame/SideGameForm";
+import { handleNumberChange } from "../utils/numberInput";
 
 import Game from "../classes/Game";
 import SideGame from "../classes/SideGame";
@@ -15,6 +17,8 @@ const AddGame = () => {
     const [rebuyCost, setRebuyCost] = useState<number | "">("");
     const [maxRebuys, setMaxRebuys] = useState<number | "">("");
     const [sideGames, setSideGames] = useState<{ name: string; cost: number | "" }[]>([]);
+
+    const navigate = useNavigate();
 
     const addSideGame = () => {
         setSideGames([...sideGames, { name: "", cost: "" }]);
@@ -51,7 +55,9 @@ const AddGame = () => {
             trackKnockouts
         );
 
-        console.log(game);
+
+        // Navigate to the next page and pass the game
+        navigate("/add-players", { state: { game } });
     }
 
     return (
@@ -61,7 +67,7 @@ const AddGame = () => {
                     <div>
                         <Input
                             value={buyIn.toString()}
-                            onChange={(e) => setBuyIn(Number(e.target.value))}
+                            onChange={(e) => handleNumberChange(e, setBuyIn)}
                             placeholder="20"
                             label="Buy In"
                         />
@@ -69,14 +75,14 @@ const AddGame = () => {
                     <div className="mt-2">
                         <Checkbox
                             value={allowRebuy}
-                            onChange={(e) => setAllowRebuy(!allowRebuy)}
+                            onChange={() => setAllowRebuy(!allowRebuy)}
                             label="Allow Rebuys"
                         />
                     </div>
                     <div>
                         <Checkbox
                             value={trackKnockouts}
-                            onChange={(e) => setTrackKnockouts(!trackKnockouts)}
+                            onChange={() => setTrackKnockouts(!trackKnockouts)}
                             label="Track Knockouts"
                         />
                     </div>
@@ -85,7 +91,7 @@ const AddGame = () => {
                             <div>
                                 <Input
                                     value={rebuyCost.toString()}
-                                    onChange={(e) => setRebuyCost(Number(e.target.value))}
+                                    onChange={(e) => handleNumberChange(e, setRebuyCost)}
                                     label="Rebuy Cost"
                                     placeholder="20"
                                 />
@@ -93,7 +99,7 @@ const AddGame = () => {
                             <div>
                                 <Input
                                     value={maxRebuys.toString()}
-                                    onChange={(e) => setMaxRebuys(Number(e.target.value))}
+                                    onChange={(e) => handleNumberChange(e, setMaxRebuys)}
                                     label="Max rebuys"
                                     placeholder="2"
                                 />

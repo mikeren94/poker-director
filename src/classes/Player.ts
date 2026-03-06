@@ -14,7 +14,7 @@ class Player {
     knockedOut: boolean; // Determines if the player has been knocked out of the game
 
     constructor(
-        name: string, 
+        name: string = "", 
         moneyGiven: number = 0, 
         selectedSideGames: string[] = [], 
         paid: boolean = false, 

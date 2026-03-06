@@ -1,5 +1,5 @@
-import Button from "../Button";
-import Input from "../Input";
+import Button from "../forms/Button";
+import Input from "../forms/Input";
 
 interface SideGameFormProps {
     name: string;

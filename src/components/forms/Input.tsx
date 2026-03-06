@@ -7,6 +7,7 @@ interface InputProps {
 }
 
 const Input = ({ value, onChange, placeholder, type = "text", label }: InputProps) => {
+
     return (
         <>
             {label && (
