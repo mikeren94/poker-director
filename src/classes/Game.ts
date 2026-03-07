@@ -21,7 +21,7 @@ class Game {
     private playerMap: Map<string, Player>;
 
     constructor(
-        buyIn: number,
+        buyIn: number = 0,
         sideGames: SideGame[] = [],
         players: Player[] = [],
         allowRebuys: boolean = false,

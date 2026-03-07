@@ -7,7 +7,10 @@ import PlayerForm from "../components/player/PlayerForm";
 
 const AddPlayers = () => {
     const location = useLocation();
-    const game = location.state?.game as Game;
+    const rawGame = location.state?.game as Game;
+    // Rehydrate the class instance
+    const game = Object.assign(new Game(), rawGame);
+
     const [players, setPlayers] = useState<Player[]>([])
 
     const addPlayer = () => {
@@ -19,6 +22,10 @@ const AddPlayers = () => {
         const updated = [...players];
         updated[index] = player;
         setPlayers(updated)
+    }
+
+    const removePlayer = (index: number) => {
+        setPlayers(players.filter((_, i) => i !== index));
     }
 
     return (
@@ -39,6 +46,8 @@ const AddPlayers = () => {
                     <PlayerForm
                         player={player}
                         save={(player) => updatePlayer(index, player)}
+                        game={game}
+                        remove={() => removePlayer(index)}
                     />
                 </div>
             ))}
