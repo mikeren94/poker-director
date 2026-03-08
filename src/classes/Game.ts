@@ -141,16 +141,24 @@ class Game {
         return totalCost;
     }
 
-    recordKnockout(killerId: string, victimId: string) {
-        if (!this.trackKnockouts) {
+    recordKnockout(victimId: string, killerId: string) {
+        const victim = this.playerMap.get(victimId);
+
+        // return if we don't find an instance of the victim
+        if (!victim) {
             return;
         }
 
-        const killer = this.playerMap.get(killerId);
-        const victim = this.playerMap.get(victimId);
+        if (!this.trackKnockouts) {
+            // Just update the victim to be knocked out
+            victim.knockedOut = true;
+            return
+        }
 
-        // Return if we don't find an instance of either player 
-        if (!killer || !victim) {
+        const killer = this.playerMap.get(killerId);
+
+        // Return if we don't find an instance of the killer
+        if (!killer) {
             return;
         }
 
@@ -163,7 +171,7 @@ class Game {
         if (killerId === victimId) {
             return;
         }
- 
+
         // Record a new instance of a knockout for these players
         const knockout = new Knockout(killerId, victimId);
 

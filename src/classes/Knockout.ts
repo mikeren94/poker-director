@@ -4,7 +4,7 @@ class Knockout {
     timestamp: Date;
 
     constructor (
-        killerId: string,
+        killerId: string | "",
         victimId: string,
         timestamp: Date = new Date()
     ) {

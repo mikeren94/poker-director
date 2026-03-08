@@ -33,7 +33,7 @@ test("A player that knocks out another player is tracked in the knockouts", () =
     game.addPlayer(player1);
     game.addPlayer(player2);
 
-    game.recordKnockout(player1.id, player2.id)
+    game.recordKnockout(player2.id, player1.id)
 
     // There should be exactly 1 knockout in the game
     expect(game.knockouts.length).toBe(1);
@@ -48,7 +48,7 @@ test("A player that knocks out another player is tracked in the knockouts", () =
     expect(knockout.timestamp).toBeInstanceOf(Date);
 });
 
-test("A player can only knock out an active player", () => {
+test("A player can only knock out an active player if knockouts are tracked", () => {
     // Create a game that allows knockouts
     game = makeGame({
         buyIn: 20,
@@ -69,8 +69,8 @@ test("A player can only knock out an active player", () => {
     game.addPlayer(player1);
     game.addPlayer(player2);
 
-    game.recordKnockout(player1.id, player2.id);
-    game.recordKnockout(player1.id, player2.id);
+    game.recordKnockout(player2.id, player1.id);
+    game.recordKnockout(player2.id, player1.id);
 
     expect(game.knockouts.length).toBe(1);
 })
@@ -92,9 +92,9 @@ test("Knocked out players are listed in the order they were knocked out", () => 
 
     // Knockout order:
     // Bob knocks out Alice
-    game.recordKnockout(p2.id, p1.id);
+    game.recordKnockout(p1.id, p2.id);
     // Charlie knocks out Bob
-    game.recordKnockout(p3.id, p2.id);
+    game.recordKnockout(p2.id, p3.id);
 
     const knockedOut = game.getKnockedOutPlayers();
 
@@ -153,7 +153,7 @@ test("Both players must exist in the game to register a knockout", () => {
 
     game.addPlayer(player1);
 
-    game.recordKnockout(player1.id, player2.id)
+    game.recordKnockout(player2.id, player1.id)
 
     // There should be no knockouts tracked in the game
     expect(game.knockouts.length).toBe(0);
@@ -179,7 +179,7 @@ test("knockouts are not recorded in a game that doesn't track knockouts", () => 
     game.addPlayer(player1);
     game.addPlayer(player2);
 
-    game.recordKnockout(player1.id, player2.id)
+    game.recordKnockout(player2.id, player1.id)
 
     // There should be no knockouts in the game
     expect(game.knockouts.length).toBe(0);
