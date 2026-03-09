@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import Game from "../classes/Game";
+import Player from "../classes/Player";
 import { useEffect, useState } from "react";
 import Button from "../components/forms/Button";
 
@@ -28,12 +29,19 @@ const ViewGame = () => {
 
     const processKnockout = () => {
         setShowKnockoutForm(false);
-        game.recordKnockout(victimId, killerId);
 
         setGame(prev => {
             const updated = Object.assign(new Game(), prev);
+
+            // Rehydrate each player into a proper Player instance
+            updated.players = prev.players.map(p =>
+                Object.assign(new Player(), p)
+            );
+
             updated.recordKnockout(victimId, killerId);
             return updated;
+
+
         });
     }
 

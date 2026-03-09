@@ -142,7 +142,7 @@ class Game {
     }
 
     recordKnockout(victimId: string, killerId: string) {
-        const victim = this.playerMap.get(victimId);
+        const victim = this.players.find(p => p.id === victimId);
 
         // return if we don't find an instance of the victim
         if (!victim) {
