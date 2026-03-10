@@ -9,7 +9,7 @@ class Game {
     buyIn: number; // The cost of the main game 
     sideGames: SideGame[]; // Array of side games for the game e.g. "High hand", "Knockouts"
     players: Player[]; // List of players in the game
-    maxRebuysPerPlayer: number | null; // If rebuys are allowed, this determines how many times a player can rebuy into the game, if 0 then there is no limit on rebuys
+    maxRebuysPerPlayer: number; // If rebuys are allowed, this determines how many times a player can rebuy into the game, if 0 then there is no limit on rebuys
     rebuyCost: number; // If rebuys are allowed, this determines how much it costs for a player to rebuy into the game, if not set then it defaults to the buy in cost of the game
     knockouts: Knockout[];
 
@@ -25,7 +25,7 @@ class Game {
         sideGames: SideGame[] = [],
         players: Player[] = [],
         allowRebuys: boolean = false,
-        maxRebuysPerPlayer: number | null = null,
+        maxRebuysPerPlayer: number = 0,
         rebuyCost: number = 0,
         trackKnockouts: boolean = false,
         knockouts: Knockout[] = []

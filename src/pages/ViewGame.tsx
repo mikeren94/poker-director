@@ -45,9 +45,19 @@ const ViewGame = () => {
         });
     }
 
-    useEffect(() => {
-        console.log(game)
-    }, [game])
+    const rebuyPlayer = (playerid: string) => {
+        setGame(prev => {
+            const updated = Object.assign(new Game(), prev);
+
+            // Rehydrate each player into a proper Player instance
+            updated.players = prev.players.map(p =>
+                Object.assign(new Player(), p)
+            );
+
+            updated.rebuyPlayer(playerid);
+            return updated;
+        });
+    }
 
     return (
         <>
@@ -60,7 +70,7 @@ const ViewGame = () => {
                     >
                         <option value="">-- Select a player --</option>
 
-                        {game.players.map((player) => (
+                        {game.players.filter(player => player.id !== victimId && !player.knockedOut).map((player) => (
                             <option key={player.id} value={player.id}>
                                 {player.name}
                             </option>
@@ -80,6 +90,18 @@ const ViewGame = () => {
                         <Button
                             label="Knock out"
                             onClick={() => checkForKnockoutForm(player.id)}
+                        />
+                    )}
+                </div>
+            ))}
+            <p>Eliminated players:</p>
+            {game.players.filter(player => player.knockedOut).map((player, index) => (
+                <div key={index}>
+                    <p>{player.name}</p>
+                    {game.allowRebuys && player.rebuys < game.maxRebuysPerPlayer && (
+                        <Button
+                            label="Rebuy"
+                            onClick={() => rebuyPlayer(player.id)}
                         />
                     )}
                 </div>
